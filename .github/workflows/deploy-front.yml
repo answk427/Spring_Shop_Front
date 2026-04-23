@@ -49,5 +49,5 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd /home/***/Spring_Shop_Deploy
-            docker-compose pull nginx
-            docker-compose up -d nginx
+            docker compose pull nginx
+            docker compose up -d nginx
