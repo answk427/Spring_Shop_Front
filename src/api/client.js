@@ -27,7 +27,7 @@ export async function apiClient(endpoint, options = {}) {
     // 갱신 실패 - 로그아웃
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    window.location.href = '/';
+    throw new Error('인증 만료');
   }
 
   if (!response.ok) {
