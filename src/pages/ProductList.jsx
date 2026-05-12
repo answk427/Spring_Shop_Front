@@ -51,10 +51,10 @@ export default function ProductList({
     setError('');
 
     try {
-      let url = `/api/products?page=${page}&size=12`;
+      let url = `/api/products?page=${page}&size=8`;
 
       if (selectedCategory) {
-        url = `/api/products/category/${selectedCategory}?page=${page}&size=12`;
+        url = `/api/products/category/${selectedCategory}?page=${page}&size=8`;
       }
 
       const response = await apiClient(url);

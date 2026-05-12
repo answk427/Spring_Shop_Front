@@ -1,75 +1,118 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Navigation.css';
 
-export default function Navigation({ user, cartCount, onNavigate, onLogout }) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+export default function Navigation({ isAuthenticated, user, cartCount, onNavigate, onLogout }) {
+  const handleCartClick = () => {
+    if (!isAuthenticated) {
+      alert('로그인 후 이용 가능합니다.');
+      onNavigate('auth');
+      return;
+    }
+    onNavigate('cart');
+  };
+
+  const handleOrdersClick = () => {
+    if (!isAuthenticated) {
+      alert('로그인 후 이용 가능합니다.');
+      onNavigate('auth');
+      return;
+    }
+    onNavigate('orders');
+  };
+
+  const handleUploadClick = () => {
+    if (!isAuthenticated) {
+      alert('로그인 후 판매 가능합니다.');
+      onNavigate('auth');
+      return;
+    }
+    onNavigate('upload');
+  };
+
+  const handleMyPageClick = () => {
+    if (!isAuthenticated) {
+      alert('로그인 후 이용 가능합니다.');
+      onNavigate('auth');
+      return;
+    }
+    onNavigate('myPage');
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => onNavigate('products')}>
-          <span className="logo-icon">◆</span>
-          <span className="logo-text">ShopHub</span>
-        </div>
-
-        <div className="navbar-menu">
-          <button 
-            className="nav-link"
-            onClick={() => onNavigate('products')}
-          >
-            상품
-          </button>
-          <button 
-            className="nav-link"
-            onClick={() => onNavigate('cart')}
-          >
-            장바구니 {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </button>
-          <button 
-            className="nav-link"
-            onClick={() => onNavigate('orders')}
-          >
-            주문
-          </button>
-          <button 
-            className="nav-link"
-            onClick={() => onNavigate('upload')}
-          >
-            판매하기
-          </button>
-        </div>
-
-        <div className="navbar-user">
-          <span className="user-email">{user?.email}</span>
-          <div className="dropdown">
-            <button 
-              className="dropdown-toggle"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      <nav className="navigation">
+        <div className="nav-container">
+          <div className="nav-brand">
+            <button
+                className="brand-logo"
+                onClick={() => onNavigate('products')}
             >
-              ▼
+              🛍️ ShopHub
             </button>
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <div className="dropdown-header">
-                  <div className="user-info">
-                    <strong>{user?.name}</strong>
-                    <small>{user?.role}</small>
-                  </div>
-                </div>
-                <button 
-                  className="dropdown-item"
-                  onClick={() => {
-                    onLogout();
-                    setIsDropdownOpen(false);
-                  }}
+          </div>
+
+          <div className="nav-links">
+            <button
+                className="nav-link"
+                onClick={() => onNavigate('products')}
+            >
+              상품
+            </button>
+
+            <button
+                className="nav-link"
+                onClick={handleCartClick}
+            >
+              🛒 장바구니
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </button>
+
+            <button
+                className="nav-link"
+                onClick={handleOrdersClick}
+            >
+              📋 주문 내역
+            </button>
+
+            <button
+                className="nav-link"
+                onClick={handleUploadClick}
+            >
+              📦 판매하기
+            </button>
+
+            {isAuthenticated && (
+                <button
+                    className="nav-link"
+                    onClick={handleMyPageClick}
                 >
-                  로그아웃
+                  👤 내 정보
                 </button>
-              </div>
+            )}
+          </div>
+
+          <div className="nav-auth">
+            {isAuthenticated ? (
+                <>
+              <span className="user-name">
+                {user?.name || user?.email || '사용자'}
+              </span>
+                  <button
+                      className="btn btn-logout"
+                      onClick={onLogout}
+                  >
+                    로그아웃
+                  </button>
+                </>
+            ) : (
+                <button
+                    className="btn btn-login"
+                    onClick={() => onNavigate('auth')}
+                >
+                  로그인
+                </button>
             )}
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
   );
 }
