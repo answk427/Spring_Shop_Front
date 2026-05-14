@@ -1,0 +1,43 @@
+.wallet-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wallet-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.wallet-balance {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.wallet-history {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.wallet-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wallet-table th,
+.wallet-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.pagination {
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

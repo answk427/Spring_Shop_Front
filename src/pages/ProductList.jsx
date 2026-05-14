@@ -51,17 +51,30 @@ export default function ProductList({
     setError('');
 
     try {
-      let url = `/api/products?page=${page}&size=8`;
 
+      const params = new URLSearchParams({
+        page,
+        size: 8
+      });
+
+      // 카테고리
       if (selectedCategory) {
-        url = `/api/products/category/${selectedCategory}?page=${page}&size=8`;
+        params.append('categoryId', selectedCategory);
       }
+
+      // 검색어
+      if (searchQuery.trim()) {
+        params.append('keyword', searchQuery.trim());
+      }
+
+      const url = `/api/products/search?${params.toString()}`;
 
       const response = await apiClient(url);
 
       setProducts(response.content ?? []);
       setTotalPages(response.totalPages ?? 0);
       setCurrentPage(page);
+
     } catch (error) {
       console.error('상품 로드 실패:', error);
       setError('상품 목록을 불러오지 못했습니다.');
@@ -69,13 +82,6 @@ export default function ProductList({
       setLoading(false);
     }
   };
-
-  // 프론트 검색
-  const filteredProducts = products.filter(product =>
-      product.name
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase())
-  );
 
   return (
       <div className="product-list-container">
@@ -119,6 +125,11 @@ export default function ProductList({
                   placeholder="상품 검색..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      loadProducts(0);
+                    }
+                  }}
                   className="search-input"
               />
             </div>
@@ -138,11 +149,11 @@ export default function ProductList({
               </div>
 
               /* 상품 있음 */
-          ) : filteredProducts.length > 0 ? (
+          ) : products.length > 0 ? (
               <>
                 <div className="products-grid">
 
-                  {filteredProducts.map(product => (
+                  {products.map(product => (
                       <div
                           key={product.id}
                           className="product-card"

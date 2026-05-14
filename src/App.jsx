@@ -35,6 +35,13 @@ export default function App() {
     }
   }, []);
 
+  // 장바구니 페이지로 이동할 때마다 최신 데이터 로드
+  useEffect(() => {
+    if (currentPage === 'cart' && isAuthenticated) {
+      loadCart();
+    }
+  }, [currentPage, isAuthenticated]);
+
   const loadUserProfile = async () => {
     try {
       const response = await apiClient('/api/users/me');
@@ -110,7 +117,7 @@ export default function App() {
       loadCart();
       showToast('장바구니에 추가되었습니다!', 'success');
     } catch (error) {
-      showToast('장바구니 추가 실패', 'error');
+      showToast('장바구니 추가 실패, ' + error.message, 'error');
     }
   };
 

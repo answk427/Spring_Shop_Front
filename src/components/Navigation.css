@@ -106,6 +106,12 @@
   font-weight: 600;
   font-size: 0.9rem;
 
+  /* 추가: 텍스트가 한 줄로만 나오게 강제함 */
+  white-space: nowrap;
+
+  /* 추가: 부모 flex 안에서 공간이 부족해도 줄어들지 않게 함 */
+  flex-shrink: 0;
+
   @media (max-width: 480px) {
     display: none;
   }

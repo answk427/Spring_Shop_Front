@@ -261,3 +261,13 @@
     font-size: 1rem;
   }
 }
+
+.amount-plus {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.amount-minus {
+  color: #dc2626;
+  font-weight: bold;
+}

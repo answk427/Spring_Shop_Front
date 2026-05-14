@@ -37,7 +37,14 @@ export async function apiClient(endpoint, options = {}) {
     throw new Error(error.message || `HTTP ${response.status}`);
   }
 
-  return response.json();
+  // body 없는 응답 처리
+  if (response.status === 204) {
+    return null;
+  }
+
+  const text = await response.text();
+
+  return text ? JSON.parse(text) : null;
 }
 
 /**
@@ -86,8 +93,8 @@ export async function apiClientMultipart(endpoint, options = {}) {
  * 토큰 갱신
  */
 async function refreshToken() {
-  const refreshToken = localStorage.getItem('refreshToken');
-  if (!refreshToken) return false;
+  // const refreshToken = localStorage.getItem('refreshToken');
+  // if (!refreshToken) return false;
 
   try {
     const response = await fetch(`${API_BASE}/api/auth/refresh`, {

@@ -1,0 +1,426 @@
+.sales-history-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sales-history-container h3 {
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* 상태 탭 */
+.status-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.status-tab {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #ddd;
+  background-color: white;
+  color: #666;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-tab:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.status-tab.active {
+  background-color: #d4af37;
+  color: #1a1a2e;
+  border-color: #d4af37;
+}
+
+/* 테이블 래퍼 */
+.orders-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.orders-table thead {
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #eee;
+}
+
+.orders-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a2e;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.orders-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.orders-table td {
+  padding: 1rem;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* 상품명 */
+.product-name {
+  font-weight: 600;
+  color: #1a1a2e;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 수량 */
+.quantity {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* 가격 */
+.price {
+  font-weight: 600;
+  color: #d4af37;
+  text-align: right;
+}
+
+/* 날짜 */
+.date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+/* 상태 배지 */
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  min-width: 80px;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-confirmed {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-shipped {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.status-delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-returned {
+  background-color: #f5c6cb;
+  color: #721c24;
+}
+
+/* 작업 버튼 */
+.actions {
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #0b7dda;
+}
+
+.btn-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.btn-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: #e68900;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #da190b;
+}
+
+.btn {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.no-action {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+/* 로딩 상태 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f0f0f0;
+  border-top: 4px solid #d4af37;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  color: #666;
+}
+
+/* 빈 상태 */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
+
+/* 에러 메시지 */
+.error-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.pagination-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #d4af37;
+  color: #1a1a2e;
+  border-color: #d4af37;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* 도움말 박스 */
+.help-box {
+  background-color: #f9f9f9;
+  border-left: 4px solid #d4af37;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.help-box h4 {
+  margin: 0 0 1rem 0;
+  color: #1a1a2e;
+  font-size: 1rem;
+}
+
+.help-box ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.help-box li {
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.help-box strong {
+  color: #1a1a2e;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .orders-table {
+    font-size: 0.85rem;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 0.75rem;
+  }
+
+  .product-name {
+    max-width: 150px;
+  }
+
+  .action-buttons {
+    gap: 0.25rem;
+  }
+
+  .btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .status-tabs {
+    gap: 0.25rem;
+  }
+
+  .status-tab {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .orders-table {
+    font-size: 0.8rem;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 0.5rem;
+  }
+
+  .product-name {
+    max-width: 100px;
+  }
+
+  .help-box {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .orders-table {
+    min-width: 600px;
+    font-size: 0.75rem;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 0.4rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .btn-sm {
+    width: 100%;
+  }
+}
