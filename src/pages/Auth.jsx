@@ -88,6 +88,7 @@ export default function Auth({ onLogin }) {
         <div className="auth-header">
           <h1>{isSignUp ? '회원가입' : '로그인'}</h1>
           <p>{isSignUp ? '새 계정을 생성하세요' : '계정에 로그인하세요'}</p>
+          <p>{isSignUp ? '' : '테스트용 ID: tester@naver.com, PW: zxcv1234'}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
